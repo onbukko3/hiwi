@@ -1,9 +1,11 @@
-import os
-import time
+import sys
 
-FILENAME = "foo.txt"
-OUTPUT = "labeling.txt"
-PUNC = ["\"", "!", "?",".",",","\'"]
+
+src_file_path = sys.argv[1]
+tgt_output_path = sys.argv[2]
+# FILENAME = "foo.txt"
+# OUTPUT = "labeling.txt"
+PUNC = ["\"", "!", "?",".",",","\'",";",":"]
 
 def labeling(tokens):
     labels = []
@@ -37,17 +39,14 @@ def labeling(tokens):
 
     labels = ' '.join(labels)
     labels = labels + '\n'
-    print(labels)
+    
     return labels
             # elif chr in PUNC:
 
-            
 
-
-if __name__ == "__main__":
-
-    with open(FILENAME, 'r') as src:
-        with open(OUTPUT,'w') as tgt:
+def main():
+    with open(src_file_path, 'r') as src:
+        with open(tgt_output_path,'w') as tgt:
             lines = src.readlines()
             for line in lines:
                 line = line[:-1]
@@ -56,3 +55,9 @@ if __name__ == "__main__":
                 tgt.write(label)
             tgt.close()
         src.close()
+
+            
+
+
+if __name__ == "__main__":
+    main()
